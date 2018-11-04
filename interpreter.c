@@ -15,8 +15,14 @@ int eval(Expr* expr) {
     switch (expr->attr.op.operator) {
       case PLUS: 
         result = vLeft + vRight;
-      case MINOS:
+      case MINUS:
         result = vLeft - vRight;
+      case DIV:
+        result = vLeft / vRight;
+      case MUL:
+        result = vLeft * vRight;
+      case PER:
+        result = vLeft % vRight;
         break;
       // TODO Other cases here ...
       default: yyerror("Unknown operator!");
