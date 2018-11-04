@@ -2,11 +2,18 @@
 %token 
   INT  
   PLUS
-  MINOS
+  MINUS
+  DIV
+  MUL
+  PER
 
 // Operator associativity & precedence
 %left PLUS
-%left MINOS
+%left MINUS
+%left DIV
+%left MUL
+%left PER
+
 
 // Root-level grammar symbol
 %start program;
@@ -47,9 +54,21 @@ expr:
     $$ = ast_operation(PLUS, $1, $3); 
   }
   |
-  expr MINOS expr {
-    $$ = ast_operation(MINOS, $1, $3);
-  }  
+  expr MINUS expr {
+    $$ = ast_operation(MINUS, $1, $3);
+  }
+  |
+  expr DIV expr {
+    $$ = ast_operation(DIV, $1, $3);
+  }
+  |
+  expr MUL expr {
+    $$ = ast_operation(MUL, $1, $3);
+  }
+  |
+  expr PER expr {
+    $$ = ast_operation(PER, $1, $3);
+  }
   ;
 %%
 
